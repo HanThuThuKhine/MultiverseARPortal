@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multiverse Portal AR</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+  <a-scene>
+
+    <!-- Assets -->
+    <a-assets>
+      <img id="sky1" src="world1.jpg">
+      <img id="sky2" src="world2.jpg">
+      <img id="sky3" src="world3.jpg">
+      <audio id="sound1" src="sound1.mp3"></audio>
+      <audio id="sound2" src="sound2.mp3"></audio>
+      <audio id="sound3" src="sound3.mp3"></audio>
+    </a-assets>
+
+    <!-- Portals -->
+    <a-entity id="portal1" class="clickable"
+      geometry="primitive: torus; radius: 1; tube: 0.2;"
+      material="color: #4CC3D9; opacity: 0.7;"
+      position="-2 1.5 -4"
+      animation="property: rotation; to: 0 360 0; loop: true; dur: 4000">
+    </a-entity>
+
+    <a-entity id="portal2" class="clickable"
+      geometry="primitive: torus; radius: 1; tube: 0.2;"
+      material="color: #EF2D5E; opacity: 0.7;"
+      position="0 1.5 -4"
+      animation="property: rotation; to: 0 -360 0; loop: true; dur: 4000">
+    </a-entity>
+
+    <a-entity id="portal3" class="clickable"
+      geometry="primitive: torus; radius: 1; tube: 0.2;"
+      material="color: #FFC65D; opacity: 0.7;"
+      position="2 1.5 -4"
+      animation="property: rotation; to: 0 360 0; loop: true; dur: 4000">
+    </a-entity>
+
+    <!-- Background sky -->
+    <a-sky id="sky" src="#sky1" rotation="0 -90 0"></a-sky>
+
+    <!-- Sounds attached to camera -->
+    <a-entity id="cameraRig">
+      <a-camera position="0 1.6 0"></a-camera>
+
+      <!-- Sound Elements -->
+      <a-sound id="bgSound" src="#sound1" autoplay="true" loop="true" volume="0.5"></a-sound>
+    </a-entity>
+
+    <!-- Interaction logic -->
+    <script>
+      const sky = document.querySelector('#sky');
+      const bgSound = document.querySelector('#bgSound');
+
+      document.querySelector('#portal1').addEventListener('click', () => {
+        sky.setAttribute('src', '#sky1');
+        bgSound.setAttribute('src', '#sound1');
+        bgSound.components.sound.stopSound();
+        bgSound.components.sound.playSound();
+      });
+
+      document.querySelector('#portal2').addEventListener('click', () => {
+        sky.setAttribute('src', '#sky2');
+        bgSound.setAttribute('src', '#sound2');
+        bgSound.components.sound.stopSound();
+        bgSound.components.sound.playSound();
+      });
+
+      document.querySelector('#portal3').addEventListener('click', () => {
+        sky.setAttribute('src', '#sky3');
+        bgSound.setAttribute('src', '#sound3');
+        bgSound.components.sound.stopSound();
+        bgSound.components.sound.playSound();
+      });
+    </script>
+
+  </a-scene>
+</body>
+</html>
